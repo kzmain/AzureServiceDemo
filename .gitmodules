@@ -1,0 +1,15 @@
+[submodule "Grpc1/Protos"]
+	path = Grpc1/Protos
+	url = https://github.com/SA-China-Robot/AzureDemoProtos.git
+[submodule "Grpc2/Protos"]
+	path = Grpc2/Protos
+	url = https://github.com/SA-China-Robot/AzureDemoProtos.git
+[submodule "Grpc3/Protos"]
+	path = Grpc3/Protos
+	url = https://github.com/SA-China-Robot/AzureDemoProtos.git
+[submodule "MVC1/Protos"]
+	path = MVC1/Protos
+	url = https://github.com/SA-China-Robot/AzureDemoProtos.git
+[submodule "MVC2/Protos"]
+	path = MVC2/Protos
+	url = https://github.com/SA-China-Robot/AzureDemoProtos.git

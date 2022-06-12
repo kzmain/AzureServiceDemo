@@ -1,0 +1,78 @@
+﻿version: '3.4'
+
+services:
+  mvc1:
+    depends_on:
+      - grpc1
+      - grpc2
+      - grpc3
+    build: 
+      context: .
+      dockerfile: MVC1/Dockerfile
+    ports:
+      - "5241:5241"
+      - "7241:7241"
+    environment:
+      - ASPNETCORE_URLS=https://+:7241;http://+:5241
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=JJTSACHINA2022..
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/saqa_jnj_com_cn.pfx
+    volumes:
+      - ./https:/https:ro
+    env_file: .env
+    networks:
+      - custom-network
+  mvc2:
+    depends_on:
+      - grpc1
+      - grpc2
+      - grpc3
+    build: 
+      context: .
+      dockerfile: MVC2/Dockerfile
+    ports:
+      - "5242:5242"
+      - "7242:7242"
+    environment:
+      - ASPNETCORE_URLS=https://+:7242;http://+:5242
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=JJTSACHINA2022..
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/saqa_jnj_com_cn.pfx
+    volumes:
+      - ./https:/https:ro
+    env_file: .env  
+    networks:
+      - custom-network
+  grpc1:
+    build: 
+      context: .
+      dockerfile: Grpc1/Dockerfile
+    ports:
+      - "5251:5251"
+    env_file: .env
+    networks:
+      custom-network:
+        aliases:
+          - grpc1
+  grpc2:
+    build: 
+      context: .
+      dockerfile: Grpc2/Dockerfile
+    ports:
+      - "5252:5252"
+    env_file: .env
+    networks:
+      custom-network:
+        aliases:
+          - grpc2
+  grpc3:
+    build: 
+      context: .
+      dockerfile: Grpc3/Dockerfile
+    ports:
+      - "5253:5253"
+    env_file: .env
+    networks:
+      custom-network:
+        aliases:
+          - grpc3
+networks:
+  custom-network:
