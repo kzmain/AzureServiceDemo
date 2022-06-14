@@ -74,7 +74,7 @@ kubectl delete -f AKS_Disk.yaml
 
 # Deploy the new pods to the AKS
 kubectl apply -f AKS_Disk.yaml
-if [ $MODE = "IC" ]; then
+if [ $MODE = "JJCR_IC" ]; then
         kubectl apply -f AKS_JJCR/Grpc1.yaml
         kubectl apply -f AKS_JJCR/Grpc2.yaml
         kubectl apply -f AKS_JJCR/Grpc3.yaml
@@ -95,9 +95,9 @@ else # $MODE = "JJCR_CN"
 fi
 
 # Upload the pfx file to the AKS PVC
-# kubectl cp https/saqa_jnj_com_cn.pfx mvc1-b55b9ffd8-hvvtz:/https
+# kubectl cp https/saqa_jnj_com_cn.pfx <podname>/https
 # kubectl exec -it <podname> -- /bin/sh
-if [ $MODE = "IC" ]; then
+if [ $MODE = "JJCR_IC" ]; then
         kubectl delete -f AKS_JJCR_IC/MVC1.yaml
         kubectl delete -f AKS_JJCR_IC/MVC2.yaml
         kubectl apply -f  AKS_JJCR_IC/MVC1_PVC.yaml
