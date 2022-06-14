@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc1
+  labels:
+    purpose: deploy-grpc1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: grpc1
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - env:
+            - name: GRPC1_HTTP
+              value: http://grpc1:5251
+            - name: GRPC2_HTTP
+              value: http://grpc2:5252
+            - name: GRPC3_HTTP
+              value: http://grpc3:5253
+            - name: APPLICATION_INSIGHTS_CONNECTION_STRING
+              value: InstrumentationKey=b7e5f4ad-40e4-480f-bc5a-fc300588ba80;IngestionEndpoint=https://eastasia-0.in.applicationinsights.azure.com/;LiveEndpoint=https://eastasia.livediagnostics.monitor.azure.com/
+            - name: COGNITIVE_TRANSLATOR_KEY
+              value: 8e9362b13f4b48ba96530a8ce977d0a8
+            - name: COGNITIVE_TRANSLATOR_ENDPOINT
+              value: https://api.cognitive.microsofttranslator.com/
+            - name: COGNITIVE_TRANSLATOR_LOCATION
+              value: eastasia
+            - name: COSMOS_DB_ENDPOINT
+              value: https://applicationinsightcosmosdb.documents.azure.com:443/
+            - name: COSMOS_DB_PRIMARY_KEY
+              value: UjeAatb6Pn7fC4RnqZlrqJjF13xMIEt6K2xSZz7uwENPh4ns3HEg2qc3tkFPB4R4gtVOAShoQ6WnNDozBOucUA==
+            - name: COSMOS_DB_DATABASE_ID
+              value: ToDoList
+            - name: COSMOS_DB_CONTAINER_ID
+              value: Items
+            - name: MYSQL_CONNECTION_STRING
+              value: Server=applicationinsightmysql.mysql.database.azure.com; Port=3306; Database=testdb; Uid=kzmain@applicationinsightmysql; Pwd=JJTSACHINA2022```; SslMode=Preferred;
+            - name: SQL_SERVER_DATASOURCE
+              value: applicationinsightsql.database.windows.net
+            - name: SQL_SERVER_USERID
+              value: kzmain
+            - name: SQL_SERVER_PASSWORD
+              value: JJTSACHINA2022```
+            - name: SQL_SERVER_INITIAL_CATALOG
+              value: testdb
+            - name: AZURE_BLOB_CONN_STRING
+              value: BlobEndpoint=https://kaiappinsstorage.blob.core.windows.net/;QueueEndpoint=https://kaiappinsstorage.queue.core.windows.net/;FileEndpoint=https://kaiappinsstorage.file.core.windows.net/;TableEndpoint=https://kaiappinsstorage.table.core.windows.net/;SharedAccessSignature=sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2032-06-12T01:58:33Z&st=2022-06-11T17:58:33Z&sip=0.0.0.0-255.255.255.255&spr=https&sig=XVxZ5cbd%2FARlyeUSEFQ%2BqJ4eq0gBGGE3FKBJKOAFsbU%3D
+            - name: AZURE_FILE_SHARE_CONN_STRING
+              value: BlobEndpoint=https://kaiappinsstorage.blob.core.windows.net/;QueueEndpoint=https://kaiappinsstorage.queue.core.windows.net/;FileEndpoint=https://kaiappinsstorage.file.core.windows.net/;TableEndpoint=https://kaiappinsstorage.table.core.windows.net/;SharedAccessSignature=sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2032-06-12T01:58:33Z&st=2022-06-11T17:58:33Z&sip=0.0.0.0-255.255.255.255&spr=https&sig=XVxZ5cbd%2FARlyeUSEFQ%2BqJ4eq0gBGGE3FKBJKOAFsbU%3D
+          image: jcfh-docker.artifactrepo.jnj.com/azureservicedemo_grpc1:x64_from_mac
+          name: grpc1
+          ports:
+            - containerPort: 5251
+      imagePullSecrets:
+        - name: aksregistrykey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc1
+spec:
+  # type: LoadBalancer
+  ports:
+    - port: 5251
+      targetPort: 5251
+      protocol: TCP
+  selector:
+    app: grpc1

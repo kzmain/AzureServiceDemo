@@ -18,7 +18,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/saqa_jnj_com_cn.pfx
     volumes:
       - ./https:/https:ro
-    env_file: .env
+    env_file: env.env
     networks:
       - custom-network
   mvc2:
@@ -38,7 +38,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/saqa_jnj_com_cn.pfx
     volumes:
       - ./https:/https:ro
-    env_file: .env  
+    env_file: env.env  
     networks:
       - custom-network
   grpc1:
@@ -47,7 +47,7 @@ services:
       dockerfile: Grpc1/Dockerfile
     ports:
       - "5251:5251"
-    env_file: .env
+    env_file: env.env
     networks:
       custom-network:
         aliases:
@@ -58,7 +58,7 @@ services:
       dockerfile: Grpc2/Dockerfile
     ports:
       - "5252:5252"
-    env_file: .env
+    env_file: env.env
     networks:
       custom-network:
         aliases:
@@ -69,7 +69,7 @@ services:
       dockerfile: Grpc3/Dockerfile
     ports:
       - "5253:5253"
-    env_file: .env
+    env_file: env.env
     networks:
       custom-network:
         aliases:
