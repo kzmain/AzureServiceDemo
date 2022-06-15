@@ -1,10 +1,12 @@
 MODE="JJCR_IC"
 MODE="JJCR_CN"
-#MODE="AZCR_CN"
+MODE="AZCR_CN"
 
 # Set AKS information
 if [ $MODE = "JJCR_IC" ]; then
-        echo "It's greater than 100"
+        AKS_RG="AZR-ZAJ-DSGWTS-Production"
+        AKS_DK="kai-test-aks-disk-instance"
+        AKS_CL="azr-zaj-dsgwts-aks-test"
 elif [ $MODE = "AZCR_CN" ]; then
         AKS_RG="Kai-Test-AKS"
         AKS_DK="kai-test-aks-disk-instance" # not use in dynamic
@@ -37,7 +39,7 @@ az cloud set --name AzureChinaCloud
 az login
 # Set AKS subscription
 if [ $MODE = "JJCR_IC" ]; then
-        echo "____"
+        az account set --subscription 242d709d-84e3-4836-bbf0-d02a6a7601e7
 elif [ $MODE = "AZCR_CN" ]; then
         az account set --subscription 44fc1485-c550-4413-9349-7ef90e0f59b1
 else # $MODE = "JJCR_CN"

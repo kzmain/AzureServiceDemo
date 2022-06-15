@@ -20,4 +20,4 @@ RUN dotnet publish "MVC2.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MVC2.dll", "--urls", "http://0.0.0.0:5242;https://0.0.0.0:7242"]
+ENTRYPOINT ["dotnet", "MVC2.dll", "--urls", "http://0.0.0.0:5242"]
