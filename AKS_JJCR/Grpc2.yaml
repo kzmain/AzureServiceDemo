@@ -57,6 +57,7 @@ spec:
             - name: AZURE_FILE_SHARE_CONN_STRING
               value: BlobEndpoint=https://kaiappinsstorage.blob.core.windows.net/;QueueEndpoint=https://kaiappinsstorage.queue.core.windows.net/;FileEndpoint=https://kaiappinsstorage.file.core.windows.net/;TableEndpoint=https://kaiappinsstorage.table.core.windows.net/;SharedAccessSignature=sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2032-06-12T01:58:33Z&st=2022-06-11T17:58:33Z&sip=0.0.0.0-255.255.255.255&spr=https&sig=XVxZ5cbd%2FARlyeUSEFQ%2BqJ4eq0gBGGE3FKBJKOAFsbU%3D
           image: jcfh-docker.artifactrepo.jnj.com/azureservicedemo_grpc2:x64_from_mac
+          imagePullPolicy: Always
           name: grpc2
           ports:
             - containerPort: 5252

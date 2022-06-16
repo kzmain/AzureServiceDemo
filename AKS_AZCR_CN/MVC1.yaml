@@ -64,6 +64,7 @@ spec:
 #              value: /https/saqa_jnj_com_cn.pfx
           name: mvc1
           image: kaiaks.azurecr.cn/azureservicedemo_mvc1:x64_from_mac
+          imagePullPolicy: Always
           command: [ "/bin/sh","-c" ]
           args: [ "dotnet MVC1.dll --urls http://0.0.0.0:5241;https://0.0.0.0:7241" ]
           volumeMounts:

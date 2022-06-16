@@ -36,7 +36,7 @@ fi
 K8SCREDENTIALNAME="aksregistrykey"
 
 az cloud set --name AzureChinaCloud
-az login
+az login --use-device-code
 # Set AKS subscription
 if [ $MODE = "JJCR_IC" ]; then
         az account set --subscription 242d709d-84e3-4836-bbf0-d02a6a7601e7
